@@ -30,23 +30,39 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CustomUserDetailsService userDetailsService;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, CustomUserDetailsService userDetailsService) {
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter,
+                          CustomUserDetailsService userDetailsService) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.userDetailsService = userDetailsService;
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http
             .csrf(csrf -> csrf.disable())
+
+            // ✅ Enable CORS FIRST
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**", "/actuator/health").permitAll()
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // ✅ FIX: allow preflight
-                .anyRequest().permitAll()
+
+            .sessionManagement(session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
+
+            .authorizeHttpRequests(auth -> auth
+                // ⭐ VERY IMPORTANT (FIRST LINE)
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                // Auth APIs allowed
+                .requestMatchers("/api/auth/**", "/actuator/health").permitAll()
+
+                // other APIs protected (you can change later)
+                .anyRequest().authenticated()
+            )
+
             .authenticationProvider(authenticationProvider())
+
+            // ✅ JWT filter
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -66,24 +82,25 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
+            throws Exception {
         return config.getAuthenticationManager();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // ✅ FIX: use allowedOrigins (NOT allowedOriginPatterns)
         configuration.setAllowedOrigins(List.of(
             "http://localhost:5173",
+            "http://localhost:5174",
             "https://fsadfrontend-production-0663.up.railway.app"
         ));
 
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-
-        configuration.setAllowCredentials(true); // ✅ FIX: important for JWT/auth
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
