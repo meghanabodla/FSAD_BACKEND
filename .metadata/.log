@@ -1,0 +1,102 @@
+
+!ENTRY org.eclipse.core.resources 4 2 2026-04-28 01:00:34.664
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.runtime.CoreException: Problems while saving variables and containers
+	at org.eclipse.jdt.internal.core.JavaModelManager.saveVariablesAndContainers(JavaModelManager.java:4454)
+	at org.eclipse.jdt.internal.core.JavaModelManager.savingTimed(JavaModelManager.java:4726)
+	at org.eclipse.jdt.internal.core.JavaModelManager.saving(JavaModelManager.java:4712)
+	at org.eclipse.core.internal.resources.SaveManager.executeLifecycle(SaveManager.java:466)
+	at org.eclipse.core.internal.resources.SaveManager$1.run(SaveManager.java:271)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.core.internal.resources.SaveManager.broadcastLifecycle(SaveManager.java:274)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1284)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2549)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:558)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
+Caused by: java.io.FileNotFoundException: C:\Users\megha\OneDrive\Desktop\fsad(proj)\assignment\backend\.metadata\.plugins\org.eclipse.jdt.core\variablesAndContainers.dat (The system cannot find the path specified)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:255)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:210)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:171)
+	at org.eclipse.jdt.internal.core.JavaModelManager.saveVariablesAndContainers(JavaModelManager.java:4449)
+	... 10 more
+!SUBENTRY 1 org.eclipse.jdt.core 4 4 2026-04-28 01:00:34.665
+!MESSAGE Problems while saving variables and containers
+!STACK 0
+java.io.FileNotFoundException: C:\Users\megha\OneDrive\Desktop\fsad(proj)\assignment\backend\.metadata\.plugins\org.eclipse.jdt.core\variablesAndContainers.dat (The system cannot find the path specified)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:255)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:210)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:171)
+	at org.eclipse.jdt.internal.core.JavaModelManager.saveVariablesAndContainers(JavaModelManager.java:4449)
+	at org.eclipse.jdt.internal.core.JavaModelManager.savingTimed(JavaModelManager.java:4726)
+	at org.eclipse.jdt.internal.core.JavaModelManager.saving(JavaModelManager.java:4712)
+	at org.eclipse.core.internal.resources.SaveManager.executeLifecycle(SaveManager.java:466)
+	at org.eclipse.core.internal.resources.SaveManager$1.run(SaveManager.java:271)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.core.internal.resources.SaveManager.broadcastLifecycle(SaveManager.java:274)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1284)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2549)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:558)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
+!SUBENTRY 1 org.eclipse.jdt.core 4 4 2026-04-28 01:00:34.665
+!MESSAGE Problems while saving variables and containers
+!STACK 0
+java.io.FileNotFoundException: C:\Users\megha\OneDrive\Desktop\fsad(proj)\assignment\backend\.metadata\.plugins\org.eclipse.jdt.core\variablesAndContainers.dat (The system cannot find the path specified)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:255)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:210)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:171)
+	at org.eclipse.jdt.internal.core.JavaModelManager.saveVariablesAndContainers(JavaModelManager.java:4449)
+	at org.eclipse.jdt.internal.core.JavaModelManager.savingTimed(JavaModelManager.java:4726)
+	at org.eclipse.jdt.internal.core.JavaModelManager.saving(JavaModelManager.java:4712)
+	at org.eclipse.core.internal.resources.SaveManager.executeLifecycle(SaveManager.java:466)
+	at org.eclipse.core.internal.resources.SaveManager$1.run(SaveManager.java:271)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.core.internal.resources.SaveManager.broadcastLifecycle(SaveManager.java:274)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1284)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2549)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:558)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2026-04-28 01:00:34.670
+!MESSAGE Can't write workspace state
+!STACK 0
+java.io.FileNotFoundException: C:\Users\megha\OneDrive\Desktop\fsad(proj)\assignment\backend\.metadata\.plugins\org.eclipse.m2e.core\workspaceState.ser (The system cannot find the path specified)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:255)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:210)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:171)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryReader.createObjectOutputStream(ProjectRegistryReader.java:127)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryReader.writeWorkspaceState(ProjectRegistryReader.java:116)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.writeWorkspaceState(ProjectRegistryManager.java:1052)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.saving(ProjectRegistryManager.java:1203)
+	at org.eclipse.core.internal.resources.SaveManager.executeLifecycle(SaveManager.java:466)
+	at org.eclipse.core.internal.resources.SaveManager$1.run(SaveManager.java:271)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.core.internal.resources.SaveManager.broadcastLifecycle(SaveManager.java:274)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1284)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2549)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:558)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
+
+!ENTRY org.eclipse.ui.ide 4 4 2026-04-28 01:00:37.159
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 4 1 2026-04-28 01:00:37.161
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 568 2026-04-28 01:00:37.161
+!MESSAGE Could not write workspace metadata 'C:/Users/megha/OneDrive/Desktop/fsad(proj)/assignment/backend/.metadata/.plugins/org.eclipse.core.resources/.root/2.tree'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\megha\OneDrive\Desktop\fsad(proj)\assignment\backend\.metadata\.plugins\org.eclipse.core.resources\.root\2.tree (The system cannot find the path specified)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:255)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:210)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:171)
+	at org.eclipse.core.internal.localstore.SafeFileOutputStream.<init>(SafeFileOutputStream.java:55)
+	at org.eclipse.core.internal.resources.SaveManager.saveTree(SaveManager.java:1491)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1288)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2549)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:558)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
