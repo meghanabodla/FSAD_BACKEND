@@ -42,9 +42,10 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-            	    .requestMatchers("/api/auth/**", "/actuator/health").permitAll()
-            	    .anyRequest().permitAll()   // 🔥 TEMP FIX
-            	)
+            		.requestMatchers("/auth/**", "/actuator/health").permitAll()
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // ✅ FIX: allow preflight
+                .anyRequest().permitAll()
+            )
             .authenticationProvider(authenticationProvider())
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -72,11 +73,21 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(List.of("*"));
+
+        // ✅ FIX: use allowedOrigins (NOT allowedOriginPatterns)
+        configuration.setAllowedOrigins(List.of(
+            "http://localhost:5173",
+            "https://fsadfrontend-production-0663.up.railway.app"
+        ));
+
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+
+        configuration.setAllowCredentials(true); // ✅ FIX: important for JWT/auth
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
+
         return source;
     }
 }
