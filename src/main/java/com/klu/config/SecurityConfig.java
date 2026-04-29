@@ -42,7 +42,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
 
-            // ✅ Enable CORS FIRST
+            // ✅ Enable CORS
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
             .sessionManagement(session ->
@@ -50,13 +50,18 @@ public class SecurityConfig {
             )
 
             .authorizeHttpRequests(auth -> auth
-                // ⭐ VERY IMPORTANT (FIRST LINE)
+
+                // ✅ Allow preflight (VERY IMPORTANT)
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                // Auth APIs allowed
-                .requestMatchers("/api/auth/**", "/actuator/health").permitAll()
+                // ✅ Public APIs
+                .requestMatchers(
+                        "/",
+                        "/api/auth/**",
+                        "/actuator/health"
+                ).permitAll()
 
-                // other APIs protected (you can change later)
+                // ❌ Everything else needs JWT
                 .anyRequest().authenticated()
             )
 
@@ -68,11 +73,13 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // 🔐 Password encoder
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    // 🔐 Authentication provider
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -81,12 +88,14 @@ public class SecurityConfig {
         return provider;
     }
 
+    // 🔐 Authentication manager
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
             throws Exception {
         return config.getAuthenticationManager();
     }
 
+    // 🌐 CORS configuration
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
@@ -98,8 +107,12 @@ public class SecurityConfig {
             "https://fsadfrontend-production-0663.up.railway.app"
         ));
 
+        configuration.setAllowedMethods(List.of(
+            "GET", "POST", "PUT", "DELETE", "OPTIONS"
+        ));
+
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
