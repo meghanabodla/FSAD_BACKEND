@@ -39,6 +39,9 @@ public class User {
     @Column(nullable = false)
     private boolean verified;
 
+    @Column(name = "mfa_enabled", nullable = false, columnDefinition = "boolean default false")
+    private boolean mfaEnabled = false;
+
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Assignment> createdAssignments = new ArrayList<>();
 
@@ -88,6 +91,14 @@ public class User {
 
     public void setVerified(boolean verified) {
         this.verified = verified;
+    }
+
+    public boolean isMfaEnabled() {
+        return mfaEnabled;
+    }
+
+    public void setMfaEnabled(boolean mfaEnabled) {
+        this.mfaEnabled = mfaEnabled;
     }
 
     public List<Assignment> getCreatedAssignments() {
