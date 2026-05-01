@@ -101,11 +101,7 @@ public class SecurityConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of(
-            "http://localhost:5173",
-            "http://localhost:5174",
-            "https://fsadfrontend-production-0663.up.railway.app"
-        ));
+        configuration.setAllowedOrigins(List.of("*"));
 
         configuration.setAllowedMethods(List.of(
             "GET", "POST", "PUT", "DELETE", "OPTIONS"
@@ -113,7 +109,7 @@ public class SecurityConfig {
 
         configuration.setAllowedHeaders(List.of("*"));
 
-        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(false);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
