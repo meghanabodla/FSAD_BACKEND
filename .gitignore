@@ -1,0 +1,7 @@
+target/
+.metadata/
+.settings/
+*.log
+*.args
+sources.txt
+uploads/

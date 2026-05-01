@@ -9,18 +9,16 @@ public class AuthResponse {
     private String email;
     private Role role;
     private boolean verified;
-    private boolean mfaRequired;
     private String message;
 
     public AuthResponse(String token, Long userId, String name, String email, Role role, boolean verified,
-            boolean mfaRequired, String message) {
+            String message) {
         this.token = token;
         this.userId = userId;
         this.name = name;
         this.email = email;
         this.role = role;
         this.verified = verified;
-        this.mfaRequired = mfaRequired;
         this.message = message;
     }
 
@@ -46,10 +44,6 @@ public class AuthResponse {
 
     public boolean isVerified() {
         return verified;
-    }
-
-    public boolean isMfaRequired() {
-        return mfaRequired;
     }
 
     public String getMessage() {

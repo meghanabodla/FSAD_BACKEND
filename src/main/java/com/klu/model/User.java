@@ -1,6 +1,5 @@
 package com.klu.model;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,14 +38,6 @@ public class User {
 
     @Column(nullable = false)
     private boolean verified;
-
-    private String registrationOtp;
-    private LocalDateTime registrationOtpExpiry;
-    private String loginOtp;
-    private LocalDateTime loginOtpExpiry;
-
-    @Column(nullable = false)
-    private boolean mfaEnabled;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Assignment> createdAssignments = new ArrayList<>();
@@ -97,46 +88,6 @@ public class User {
 
     public void setVerified(boolean verified) {
         this.verified = verified;
-    }
-
-    public String getRegistrationOtp() {
-        return registrationOtp;
-    }
-
-    public void setRegistrationOtp(String registrationOtp) {
-        this.registrationOtp = registrationOtp;
-    }
-
-    public LocalDateTime getRegistrationOtpExpiry() {
-        return registrationOtpExpiry;
-    }
-
-    public void setRegistrationOtpExpiry(LocalDateTime registrationOtpExpiry) {
-        this.registrationOtpExpiry = registrationOtpExpiry;
-    }
-
-    public String getLoginOtp() {
-        return loginOtp;
-    }
-
-    public void setLoginOtp(String loginOtp) {
-        this.loginOtp = loginOtp;
-    }
-
-    public LocalDateTime getLoginOtpExpiry() {
-        return loginOtpExpiry;
-    }
-
-    public void setLoginOtpExpiry(LocalDateTime loginOtpExpiry) {
-        this.loginOtpExpiry = loginOtpExpiry;
-    }
-
-    public boolean isMfaEnabled() {
-        return mfaEnabled;
-    }
-
-    public void setMfaEnabled(boolean mfaEnabled) {
-        this.mfaEnabled = mfaEnabled;
     }
 
     public List<Assignment> getCreatedAssignments() {

@@ -21,23 +21,18 @@ public class EmailService {
     }
 
     public void sendEmail(String to, String subject, String body) {
-        validateMailConfiguration();
-
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(mailUsername);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(body);
+
         try {
             mailSender.send(message);
         } catch (MailException ex) {
-            throw new IllegalStateException("Email delivery failed. Check your Gmail SMTP configuration and app password.", ex);
-        }
-    }
-
-    private void validateMailConfiguration() {
-        if (mailUsername == null || mailUsername.isBlank() || mailUsername.contains("change-me")) {
-            throw new IllegalStateException("Email delivery is not configured. Set MAIL_USERNAME to your Gmail address.");
+            throw new IllegalStateException(
+                "Email failed. Check Gmail App Password & SMTP settings.", ex
+            );
         }
     }
 }
